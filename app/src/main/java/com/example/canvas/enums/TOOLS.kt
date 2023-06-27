@@ -9,6 +9,6 @@ enum class TOOLS (
 ) {
     NORMAL(R.drawable.ic_horizontal_line),
     DASH(R.drawable.ic_dashed_line),
-    //SIZE(R.drawable.baseline_brightness_1_24),
+    SIZE(R.drawable.baseline_line_weight_24),
     PALETTE(R.drawable.baseline_brightness_1_24)
 }

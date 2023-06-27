@@ -11,6 +11,7 @@ class MainActivity : AppCompatActivity() {
     companion object {
         private const val PALETTE_VIEW = 0
         private const val TOOLS_VIEW = 1
+        private const val SIZE_VIEW = 2
     }
 
     private val viewModel: CanvasViewModel by viewModel()
@@ -19,6 +20,7 @@ class MainActivity : AppCompatActivity() {
 
     private val paletteLayout: ToolsLayout by lazy { findViewById(R.id.paletteLayout) }
     private val toolsLayout: ToolsLayout by lazy { findViewById(R.id.toolLayout) }
+    private val sizeLayout: ToolsLayout by lazy { findViewById(R.id.sizeLayout) }
     private val ivTools: ImageView by lazy { findViewById(R.id.ivTools) }
     private val drawView: DrawView by lazy { findViewById(R.id.viewDraw) }
 
@@ -26,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        toolsList = listOf(paletteLayout, toolsLayout)
+        toolsList = listOf(paletteLayout, toolsLayout, sizeLayout)
         viewModel.viewState.observe(this, ::render)
 
         paletteLayout.setOnClickListener {
@@ -35,6 +37,10 @@ class MainActivity : AppCompatActivity() {
 
         toolsLayout.setOnClickListener {
             viewModel.processUiEvent(UiEvent.OnToolsClick(it))
+        }
+
+        sizeLayout.setOnClickListener {
+            viewModel.processUiEvent(UiEvent.OnSizeClick(it))
         }
 
         ivTools.setOnClickListener {
@@ -50,6 +56,11 @@ class MainActivity : AppCompatActivity() {
         with(toolsList[TOOLS_VIEW]) {
             render(viewState.toolsList)
             isVisible = viewState.isToolsVisible
+
+        }
+        with(toolsList[SIZE_VIEW]) {
+            render(viewState.sizeList)
+            isVisible = viewState.isBrushSizeChangerVisible
         }
 
         drawView.render(viewState.canvasViewState)

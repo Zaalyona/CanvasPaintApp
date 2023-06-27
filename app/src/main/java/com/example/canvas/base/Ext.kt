@@ -1,5 +1,6 @@
 package com.example.canvas.base
 
+import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.hannesdorfmann.adapterdelegates4.AbsDelegationAdapter
 
@@ -10,13 +11,14 @@ fun <T> AbsDelegationAdapter<T>.setData(data: T) {
 
 fun RecyclerView.setAdapterAndCleanupOnDetachFromWindow(recyclerViewAdapter: RecyclerView.Adapter<*>) {
     adapter = recyclerViewAdapter
-    /*addOnAttachStateChangeListener(object : View.OnAttachStateChangeListener {
-        override fun onViewDetachedFromWindow(v: View?) {
+    addOnAttachStateChangeListener(object : View.OnAttachStateChangeListener {
+        override fun onViewDetachedFromWindow(v: View) {
             adapter = null
             removeOnAttachStateChangeListener(this)
         }
 
-        override fun onViewAttachedToWindow(v: View?) {
+        override fun onViewAttachedToWindow(v: View) {
+
         }
-    })*/
+    })
 }

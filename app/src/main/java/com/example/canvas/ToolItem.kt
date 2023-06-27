@@ -15,4 +15,5 @@ sealed class ToolItem : Item {
         val selectedSize: SIZE = SIZE.SMALL,
         val selectedColor: COLOR = COLOR.BLACK
     ) : ToolItem()
+    data class SizeModel(val size: Int) : ToolItem()
 }
